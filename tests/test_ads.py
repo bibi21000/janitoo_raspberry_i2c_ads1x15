@@ -54,7 +54,7 @@ class TestADSThread(JNTTThreadRun, JNTTThreadRunCommon):
     """Test the datarrd thread
     """
     thread_name = "rpii2c"
-    conf_file = "tests/data/janitoo_raspberry_i2c_ina219.conf"
+    conf_file = "tests/data/janitoo_raspberry_i2c_ads.conf"
 
     def test_101_check_values(self):
         self.skipRasperryTest()
