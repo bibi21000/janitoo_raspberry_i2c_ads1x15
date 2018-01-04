@@ -49,3 +49,24 @@ class TestADSComponent(JNTTComponent, JNTTComponentCommon):
     """
     component_name = "rpii2c.ads"
 
+class TestADSThread(JNTTThreadRun, JNTTThreadRunCommon):
+    """Test the datarrd thread
+    """
+    thread_name = "rpii2c"
+    conf_file = "tests/data/janitoo_raspberry_i2c_ina219.conf"
+
+    def test_101_check_values(self):
+        self.skipRasperryTest()
+        self.wait_for_nodeman()
+        time.sleep(5)
+        self.assertValueOnBus('ads1','data')
+
+    def test_102_get_values(self):
+        self.onlyRasperryTest()
+        self.wait_for_nodeman()
+        time.sleep(5)
+        data = self.thread.bus.nodeman.find_value('ina1','data').data
+        print(data)
+        self.assertNotEqual(data, None)
+        self.assertNotInLogfile('^ERROR ')
+        
